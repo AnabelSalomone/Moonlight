@@ -11,5 +11,6 @@ How to run the database
 
 How to run the node project
 	- Install Express : https://expressjs.com/en/starter/installing.html
+	- run "npm i" to install the dependencies
 	- run "npm start" at the root of the project
 	
