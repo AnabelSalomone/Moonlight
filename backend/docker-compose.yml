@@ -1,0 +1,19 @@
+version : "3.7"
+
+services:
+  postgres:
+    container_name: postgres_container
+    image: postgres:12
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+      PGDATA: ./docker/postgres/data
+      TZ: Europe/Paris
+    volumes:
+      - ./docker/postgres/moonlight.sql:/docker-entrypoint-initdb.d/moonlight.sql
+      - psql:/var/lib/postgresql/data/pgdata
+      - ./docker/postgres/data:/data
+    ports:
+      - "5432:5432"
+volumes:
+  psql:
