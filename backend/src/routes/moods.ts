@@ -28,27 +28,17 @@ router.get('/:id', async function (req, res, next) {
 });
 
 /* POST mood. */
-router.get('/', async function (req, res, next) {
-  const moods = await MoodService.getAllMoods();
-  // If we do have the moods list we send it
-  if (moods != null) {
-    res.send(moods);
-    return;
-  }
-  res.status(500)
-  res.send("Error : can't find the moods")
+router.post('/', async function (req, res, next) {
+  const {rowCount} =  await MoodService.createMood(req.body);
+  // Is the row created ?
+  res.send(rowCount == 1 ? true: false);
 });
 
 /* DELETE mood. */
-router.get('/', async function (req, res, next) {
-  const moods = await MoodService.getAllMoods();
-  // If we do have the moods list we send it
-  if (moods != null) {
-    res.send(moods);
-    return;
-  }
-  res.status(500)
-  res.send("Error : can't find the moods")
+router.delete('/:id', async function (req, res, next) {
+  const { id } = req.params;
+  const result = await MoodService.deleteMood(id);
+  res.send(result);
 });
 
 export default router

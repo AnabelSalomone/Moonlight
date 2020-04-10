@@ -24,4 +24,10 @@ MoodService.getMoodById = (id) => __awaiter(void 0, void 0, void 0, function* ()
     const { rows } = yield index_1.default.query(`SELECT * FROM MOOD WHERE ID = $1`, [id]);
     return rows[0];
 });
+MoodService.createMood = (mood) => __awaiter(void 0, void 0, void 0, function* () {
+    return yield index_1.default.query(`INSERT INTO MOOD(note,creation_date,id_emotion,id_user) VALUES ($1,$2,$3,$4);`, [mood.note, mood.creationDate, mood.idEmotion, mood.idUser]);
+});
+MoodService.deleteMood = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    return yield index_1.default.query(`DELETE FROM MOOD WHERE ID = $1`, [id]);
+});
 //# sourceMappingURL=moodService.js.map

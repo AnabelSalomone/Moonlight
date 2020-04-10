@@ -43,29 +43,18 @@ router.get('/:id', function (req, res, next) {
     });
 });
 /* POST mood. */
-router.get('/', function (req, res, next) {
+router.post('/', function (req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
-        const moods = yield moodService_1.default.getAllMoods();
-        // If we do have the moods list we send it
-        if (moods != null) {
-            res.send(moods);
-            return;
-        }
-        res.status(500);
-        res.send("Error : can't find the moods");
+        const result = yield moodService_1.default.createMood(req.body);
+        res.send(result);
     });
 });
 /* DELETE mood. */
-router.get('/', function (req, res, next) {
+router.delete('/:id', function (req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
-        const moods = yield moodService_1.default.getAllMoods();
-        // If we do have the moods list we send it
-        if (moods != null) {
-            res.send(moods);
-            return;
-        }
-        res.status(500);
-        res.send("Error : can't find the moods");
+        const { id } = req.params;
+        const result = yield moodService_1.default.deleteMood(id);
+        res.send(result);
     });
 });
 exports.default = router;
