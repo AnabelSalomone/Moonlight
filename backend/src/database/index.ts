@@ -1,6 +1,6 @@
-const { Pool } = require('pg')
+import {Pool} from 'pg';
 
-//TODO: store these variables elsewhere
+// TODO: store these variables elsewhere
 const pool = new Pool(
     {
         user: 'postgres',
@@ -11,8 +11,8 @@ const pool = new Pool(
       }
 )
 
-module.exports = {
-  query: (text, params, callback) => {
-    return pool.query(text, params, callback)
-  },
+export default class Db {
+  static query =  (text:any, params:any) => {
+    return pool.query(text, params)
+  }
 }
