@@ -29,9 +29,15 @@ router.get('/:id', async function (req, res, next) {
 
 /* POST mood. */
 router.post('/', async function (req, res, next) {
-  const {rowCount} =  await MoodService.createMood(req.body);
-  // Is the row created ?
-  res.send(rowCount == 1 ? true: false);
+  await MoodService.createMood(req.body)
+    .then(({rowCount}) => {
+      // Is the row created ?
+      res.send(rowCount == 1 ? true : false);
+    })
+    .catch(() => {
+      res.status(500)
+      res.send("Error : can't create the mood")
+    })
 });
 
 /* DELETE mood. */
